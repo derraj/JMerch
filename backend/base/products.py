@@ -1,4 +1,4 @@
-const products = [
+products = [
   {
     '_id': '1',
     'name': 'Airpods Wireless Bluetooth Headphones',
@@ -78,6 +78,3 @@ const products = [
     'numReviews': 12,
   },
 ]
-
-
-export default products
