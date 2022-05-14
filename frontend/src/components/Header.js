@@ -6,7 +6,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 function Header() {
   return (
     <header>
-
       {['sm'].map((expand) => (
         <Navbar key={expand} bg="dark" variant='dark' collapseOnSelect expand={expand} className="mb-3">
           <Container fluid>
