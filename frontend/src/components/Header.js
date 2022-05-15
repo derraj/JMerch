@@ -1,55 +1,73 @@
-
 import React from 'react'
-import { Offcanvas, Button, Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { Offcanvas, Button, Container, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { logout } from '../actions/userActions';
 
 function Header() {
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout())
+}
+
+
   return (
     <header>
-      {['sm'].map((expand) => (
-        <Navbar key={expand} bg="dark" variant='dark' collapseOnSelect expand={expand} className="mb-3">
-          <Container fluid>
-            <LinkContainer to='/'>
-              <Navbar.Brand >JMerch</Navbar.Brand>
-            </LinkContainer>
+            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+                <Container>
+                    <LinkContainer to='/'>
+                        <Navbar.Brand>JMerch</Navbar.Brand>
+                    </LinkContainer>
 
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Offcanvas
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <LinkContainer to='/cart'>
-                    <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to='/login'>
-                    <Nav.Link ><i className='fas fa-user'></i>Login</Nav.Link>
-                  </LinkContainer>
-                </Nav>
-                <Form className="d-flex">
-                  <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="success">Search</Button>
-                </Form>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
-      ))}
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"  />
+                    <Navbar.Collapse id="basic-navbar-nav" style={{justifyContent: 'right'}}>
+                        {/* <SearchBox /> */}
+                        <Nav className="ml-auto">
+                            <LinkContainer to='/cart'>
+                                <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
+                            </LinkContainer>
+
+                            {userInfo ? (
+                                <NavDropdown title={userInfo.name} id='username'>
+                                    <LinkContainer to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    </LinkContainer>
+
+                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+
+                                </NavDropdown>
+                            ) : (
+                                    <LinkContainer to='/login'>
+                                        <Nav.Link><i className="fas fa-user"></i>Login</Nav.Link>
+                                    </LinkContainer>
+                                )}
 
 
-    </header>
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title='Admin' id='adminmenue'>
+                                    <LinkContainer to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                    </LinkContainer>
+
+                                    <LinkContainer to='/admin/productlist'>
+                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                    </LinkContainer>
+
+                                    <LinkContainer to='/admin/orderlist'>
+                                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                                    </LinkContainer>
+
+                                </NavDropdown>
+                            )}
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </header>
   )
 }
 

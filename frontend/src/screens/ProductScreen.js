@@ -10,7 +10,7 @@ function ProductScreen() {
   const [qty, setQty] = useState(1);
 
   const match = useParams();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetails = useSelector(state => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -105,6 +105,7 @@ function ProductScreen() {
                         type='button'
                         disabled={product.countInStock == 0}
                         onClick={addToCardHandler}
+                        
                       >
                         Add to cart
                       </Button>
