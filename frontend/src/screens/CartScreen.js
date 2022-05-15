@@ -20,7 +20,7 @@ function CartScreen() {
   }
 
   function checkoutHandler () {
-    navigate('/login?redirect=shipping');
+    navigate('/login?redirect=/shipping'); // redirect to /shipping if logged in
   }
 
   useEffect(() => {

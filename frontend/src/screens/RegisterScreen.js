@@ -9,34 +9,34 @@ import { register } from '../actions/userActions'
 
 function RegisterScreen() {
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  const userRegister = useSelector(state => state.userRegister)
-  const { error, loading, userInfo } = userRegister
+  const userRegister = useSelector(state => state.userRegister);
+  const { error, loading, userInfo } = userRegister;
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      navigate(redirect);
     }
   }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (password != confirmPassword) {
-      setMessage('Passwords do not match')
+      setMessage('Passwords do not match');
     } else {
-      dispatch(register(name, email, password))
+      dispatch(register(name, email, password));
     }
 
   }
