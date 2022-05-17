@@ -1,7 +1,6 @@
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 
-
 # sender = object that sends signal
 # instance = actual object being sent
 # this signal sets the username to the email

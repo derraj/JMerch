@@ -10,13 +10,13 @@ export const createOrder = (order) => async (dispatch, getState) => {
         })
 
         const {
-            userLogin: { userInfo },
+            userLogin: { userInfo }, //get user info from state
         } = getState()
 
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}` // use token from userinfo
             }
         }
 

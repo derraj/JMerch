@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from .models import Product, User, Order, OrderItem, ShippingAddress
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
-
 # https://docs.djangoproject.com/en/4.0/ref/contrib/auth/
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
