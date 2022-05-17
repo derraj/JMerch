@@ -28,7 +28,6 @@ JMerch is an ecommerce store built in React and Django with PayPal integration. 
 ## Technologies used
 - Axios
 - Bootstrap
-- Cloudinary
 - Django
 - Django REST Framework
 - Json Web Tokens (JWT)
